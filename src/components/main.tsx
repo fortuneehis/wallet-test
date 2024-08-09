@@ -1,38 +1,30 @@
-import { useWeb3React } from "@web3-react/core";
-import { useRef, useState } from "react";
-import { PhantomConnector } from "web3-react-v6-phantom";
-
-const phantom = new PhantomConnector({
-  supportedChainIds: [1, 5], // Mainnet and Goerli ChainIds
-});
+import { useWalletInfo, useWeb3Modal } from "@web3modal/wagmi/react";
+import Image from "next/image";
+import { useRef } from "react";
+import { useAccount, useDisconnect } from "wagmi";
 
 const Main = () => {
-  const { activate, deactivate, account, active } = useWeb3React();
-  const [connected, setConnected] = useState(false);
   const textRef = useRef<HTMLParagraphElement | null>(null);
-  const connect = async () => {
-    try {
-      await activate(phantom);
-      setConnected(true);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-  const disconnect = () => {
-    try {
-      deactivate();
-      setConnected(false);
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  const { open } = useWeb3Modal();
+  const { disconnect } = useDisconnect();
+  const { walletInfo } = useWalletInfo();
+  const { address, isConnecting, isConnected } = useAccount();
 
-  if (active)
+  if (walletInfo && address)
     return (
       <main className="flex items-center flex-col justify-center px-4 min-h-screen">
-        <div className="bg-gray-300 mb-4 w-full sm:w-auto items-center justify-between flex p-4 rounded-2xl">
+        {walletInfo.icon && (
+          <Image
+            width={80}
+            height={80}
+            unoptimized
+            src={walletInfo.icon}
+            alt={walletInfo.name as string}
+          />
+        )}
+        <div className="bg-gray-300 mb-4 w-full sm:w-auto mt-4 items-center justify-between flex p-4 rounded-2xl">
           <p ref={textRef} className="mr-1 text-sm sm:text-base truncate">
-            {account}
+            {address}
           </p>
           <svg
             onClick={() => {
@@ -65,7 +57,7 @@ const Main = () => {
         </div>
         <button
           className="bg-gray-900 text-white px-8 py-4 rounded-full"
-          onClick={disconnect}
+          onClick={() => disconnect()}
         >
           Disconnect
         </button>
@@ -76,9 +68,9 @@ const Main = () => {
     <main className="flex items-center justify-center min-h-screen">
       <button
         className="bg-[#39B588] text-white px-8 py-4 rounded-full"
-        onClick={connect}
+        onClick={() => open({ view: "Connect" })}
       >
-        Connect
+        {isConnecting && !isConnected ? "Connecting..." : "Connect"}
       </button>
     </main>
   );
