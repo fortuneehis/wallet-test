@@ -27,7 +27,7 @@ const Main = () => {
     }
   };
 
-  if (connected && active)
+  if (active)
     return (
       <main className="flex items-center flex-col justify-center px-4 min-h-screen">
         <div className="bg-gray-300 mb-4 w-full sm:w-auto items-center justify-between flex p-4 rounded-2xl">
