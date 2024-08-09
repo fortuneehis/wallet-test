@@ -7,7 +7,7 @@ const phantom = new PhantomConnector({
 });
 
 const Main = () => {
-  const { activate, deactivate, account, connector } = useWeb3React();
+  const { activate, deactivate, account, connector, active } = useWeb3React();
   const [connected, setConnected] = useState(false);
   const textRef = useRef<HTMLParagraphElement | null>(null);
   const connect = async () => {
@@ -27,7 +27,7 @@ const Main = () => {
     }
   };
 
-  if (connected)
+  if (connected && active)
     return (
       <main className="flex items-center flex-col justify-center px-4 min-h-screen">
         <div className="bg-gray-300 mb-4 w-full sm:w-auto items-center justify-between flex p-4 rounded-2xl">
