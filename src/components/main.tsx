@@ -7,7 +7,7 @@ const phantom = new PhantomConnector({
 });
 
 const Main = () => {
-  const { activate, deactivate, account, connector, active } = useWeb3React();
+  const { activate, deactivate, account, active } = useWeb3React();
   const [connected, setConnected] = useState(false);
   const textRef = useRef<HTMLParagraphElement | null>(null);
   const connect = async () => {
@@ -77,7 +77,6 @@ const Main = () => {
       <button
         className="bg-[#39B588] text-white px-8 py-4 rounded-full"
         onClick={connect}
-        disabled={!connector}
       >
         Connect
       </button>
