@@ -70,7 +70,7 @@ const Main = () => {
         className="bg-[#39B588] text-white px-8 py-4 rounded-full"
         onClick={() => open({ view: "Connect" })}
       >
-        {isConnecting && !isConnected ? "Connecting..." : "Connect"}
+        Connect
       </button>
     </main>
   );

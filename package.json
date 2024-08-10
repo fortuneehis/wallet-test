@@ -9,10 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-phantom": "^0.9.24",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "@solana/wallet-adapter-wallets": "^0.19.32",
+    "@solana/web3.js": "^1.95.2",
     "@tanstack/react-query": "^5.51.23",
+    "@walletconnect/jsonrpc-ws-connection": "^1.0.14",
     "@web3modal/wagmi": "^5.0.11",
     "ethers": "5",
     "next": "14.2.5",
+    "phantom-wagmi-connector": "^1.0.7",
     "react": "^18",
     "react-dom": "^18",
     "viem": "^2.19.3",

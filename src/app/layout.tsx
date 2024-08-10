@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { cookieToInitialState } from "wagmi";
-import { headers } from "next/headers";
-import AppKitProvider from "@phantom/AppContext";
-import { config } from "@phantom/util";
 
 const inter = Space_Grotesk({ subsets: ["latin"] });
 
@@ -18,12 +14,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const initialState = cookieToInitialState(config, headers().get("cookie"));
   return (
     <html lang="en">
-      <body>
-        <AppKitProvider initialState={initialState}>{children}</AppKitProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
